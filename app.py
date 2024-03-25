@@ -379,11 +379,12 @@ def admin_update_user():
 def admin_add_user():
     if request.method == 'POST':
         # Extract data from the form submission
-        username = request.form['name']
+        username = request.form['username']
+        displayname = request.form['displayname']
         password = request.form['password']
         user_level = request.form['user_level']
 
-        if not (username and password and user_level):
+        if not (username and displayname and password and user_level):
             flash('All fields are required', 'error')
             return redirect(url_for('a_users'))
 
@@ -391,7 +392,7 @@ def admin_add_user():
 
         hashed_password = generate_password_hash(password)
 
-        cursor.execute("INSERT INTO users (username, password, is_admin) VALUES (?, ?, ?);", (username, hashed_password, user_level))
+        cursor.execute("INSERT INTO users (username, display_name, password, is_admin) VALUES (?, ?, ?);", (username, displayname, hashed_password, user_level))
 
         # Commit the transaction
         conn.commit()
