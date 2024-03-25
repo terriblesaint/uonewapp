@@ -88,14 +88,14 @@
 {% if 'id' in session and g.is_admin in [2, 3] %}
     <div class="a_buttons">
         <form action="/global_selection_toggle" method="post">
-            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Toggle Mastery Link Selections</button>
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure? This turns Selection on/off for everyone!')">Toggle Mastery Link Selections</button>
             <h3 style="color:blue; text-align:center;">{{ s_toggle }}</h3>
         </form>
     </div>
     <br>
     <div class="a_buttons">
         <form action="/reset_all_selections" method="post">
-            <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure?')">Reset All Users Selections</button>
+            <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure? This resets ALL users selections!')">Reset All Users Selections</button>
         </form>
     </div>
     <br>
@@ -107,7 +107,7 @@
     <br>
     <div class="a_buttons">
         <form action="/assign_links" method="get">
-            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure? THIS WILL DELETE USERS SELECTIONS')">Assign Links</button>
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure? THIS WILL DELETE ALL USERS SELECTIONS AND ASSIGN LINKS IN DELIVERY!')">Assign Links</button>
         </form>
     </div>
     <br>

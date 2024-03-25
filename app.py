@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g, jsonify, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_file
 from werkzeug.security import generate_password_hash
 from helpers import connect_to_database
 from users import select_all_users, get_user_data, login_check_existing_user, register_check_existing_user
@@ -13,8 +13,8 @@ import random
 import os
 import io
 
-
 app = Flask(__name__, static_url_path='/static', static_folder='static')
+app.config['DEBUG'] = True
 app.secret_key = '*()123poiQWE'
 
 # Before all requests, create the following variables
@@ -917,16 +917,15 @@ def delivery():
         return redirect(url_for('mclinks_delivery'))
 
 
-@app.route('/csv', methods=['GET','POST'])
-def csv_import():
+@app.route('/import_csv', methods=['GET','POST'])
+def import_csv():
     # Initialize table
-    table_html = None
     if request.method == 'POST':
         file = request.files['file']
         if file:
 
             # Rename and save file
-            filename = 'uploaded_file.csv'
+            filename = 'links.csv'
             file.save(filename)
             conn, cursor = connect_to_database('uonew.db')
 
@@ -947,16 +946,16 @@ def csv_import():
             conn.commit()
             conn.close()
 
-    return render_template('csv.html', table=table_html)
+    return redirect(url_for('a_mclinks'))
 
-@app.route('/export', methods=['GET','POST'])
+@app.route('/export_csv', methods=['GET', 'POST'])
 def export_csv():
     if request.method == 'POST':
         # Select links data
         links_data = select_links()
 
-        # Convert links to DataFrame
-        df = pd.DataFrame(links_data)
+        # Convert links to DataFrame with specified column names
+        df = pd.DataFrame(links_data, columns=['ID', 'Name', 'Quality', 'Quantity', 'Market Price', 'Guild Price'])
 
         # Write DataFrame to buffer
         buffer = io.BytesIO()
@@ -966,9 +965,11 @@ def export_csv():
         # Return CSV file as a downloadable attachment
         return send_file(buffer,
                          download_name='links.csv',
+                         as_attachment=True,
                          mimetype='text/csv')
 
-    return render_template('csv.html')
+    return redirect(url_for('a_mclinks'))
+
 
 
 if __name__ == '__main__':
