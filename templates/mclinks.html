@@ -1,0 +1,124 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Mastery Chain Links
+{% endblock %}
+
+{% block nav %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <img src="{{ url_for('static', filename='images/uo.png') }}" alt="UO Icon" class="small-image">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="ma">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mclinks">Mastery Chain Link Availability</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="selections">Mastery Chain Link Selection</a>
+                        </li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="a_users">User Management</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [2, 3] %}
+                                    <li><a class="dropdown-item" href="a_mclinks">Link Management</a></li>
+                                    <li><a class="dropdown-item" href="a_selections">Link Selections</a></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                                    <li><a class="dropdown-item" href="mclinks_delivery">Link Delivery</a></li>
+                                    <li><a class="dropdown-item" href="a_history">Delivery History</a></li>
+                                </ul>
+                            </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0 right-align">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="user">User Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="return confirm('Are you sure?')" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <b class="nav-item">Logged in as: <p style="color:blue; text-align:center;">{{ g.display_name }}</p></b>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="flash-message">
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+
+    <div class="mclinks_table">
+        <h1>Available Mastery Chain Links</h1>
+        <hr>
+        <table class="table table-striped-columns table-hover table-bordered border-info">
+            <thead  class="mclinks_head table-primary">
+        <div hidden class="select">
+            <select class="form-control" id="locale">
+                <option value="en-US" selected>en-US</option>
+            </select>
+        </div>
+
+        <table id="table" data-search="true" data-click-to-select="true" class="table table-striped-columns table-hover table-bordered border-info table-sm">
+            <thead class="mclinks_head table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Quality</th>
+                    <th>Quantity</th>
+                    <th>Market Price</th>
+                    <th>Guild Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mclinks_data in mclinks_data %}
+                <tr>
+                    <td>{{ mclinks_data['name'] }}</td>
+                    <td>{{ mclinks_data['quality'] }}</td>
+                    <td>{{ mclinks_data['quantity'] }}</td>
+                    <td>{{ mclinks_data['market_price'] }}</td>
+                    <td>{{ mclinks_data['guild_price'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+    </div>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Mastery Chain Links
+{% endblock %}
+
+{% block nav %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <img src="{{ url_for('static', filename='images/uo.png') }}" alt="UO Icon" class="small-image">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="ma">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mclinks">Mastery Chain Link Availability</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="selections">Mastery Chain Link Selection</a>
+                        </li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="a_users">User Management</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [2, 3] %}
+                                    <li><a class="dropdown-item" href="a_mclinks">Link Management</a></li>
+                                    <li><a class="dropdown-item" href="a_selections">Link Selections</a></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                                    <li><a class="dropdown-item" href="mclinks_delivery">Link Delivery</a></li>
+                                    <li><a class="dropdown-item" href="a_history">Delivery History</a></li>
+                                </ul>
+                            </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0 right-align">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="user">User Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="return confirm('Are you sure?')" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <b class="nav-item">Logged in as: <p style="color:blue; text-align:center;">{{ g.display_name }}</p></b>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="flash-message">
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+    <div class="a_users_table">
+        <h1>Add New Mastery Chain Link</h1>
+        <hr>
+            <div class="a_users_table">
+<h1>Update Mastery Link Table via CSV</h1>
+        <form action="import_csv" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input class="btn btn-primary" type="submit" value="Upload">
+        </form>
+    </div>
+    <br>
+        <hr>
+        <table class="table table-bordered border-info">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Quality</th>
+                    <th>Quantity</th>
+                    <th>Market Price</th>
+                    <th>Guild Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="{{ url_for('add_a_mclink') }}" method="post">
+                        <td><input type="text" name="name"></td>
+                        <td class="quality">
+                            <select class="form-control" name="quality" id="quality">
+                                <option value="Bronze" name="quality">Bronze</option>
+                                <option value="Silver" name="quality">Silver</option>
+                                <option value="Gold" name="quality">Gold</option>
+                            </select>
+                        </td>
+                        <td><input type="number" name="quantity"></td>
+                        <td><input type="number" name="market_price"></td>
+                        <td><input type="number" name="guild_price"></td>
+                        <td><button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Add</button></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="a_users_table">
+        <form action="export_csv" method="post" enctype="multipart/form-data">
+            <button class="btn btn-primary" type="submit">Export as CSV</button>
+        </form>
+    </div>
+
+<br>
+    <div class="a_mclinks_table">
+        <table class="table table-bordered border-info">
+            <thead class="a_mclinks_head table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quality</th>
+                    <th>Quantity</th>
+                    <th>Market Price</th>
+                    <th>Guild Price</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <h1>Available Mastery Chain Links</h1>
+                                <hr>
+                {% for mclinks_data in mclinks_data %}
+                    <tr>
+                        <form action="{{ url_for('update_a_mclinks') }}" method="post">
+                            <td>{{ mclinks_data[0] }}</td>
+                            <input type="hidden" name="id" value="{{ mclinks_data[0] }}">
+                            <td><input type="text" name="name" value="{{ mclinks_data[1] }}"></td>
+                            <td class="quality">
+                                <select class="form-control" name="quality" id="quality">
+                                    <option value="Bronze" {% if mclinks_data[2] == 'Bronze' %} selected {% endif %}>Bronze</option>
+                                    <option value="Silver" {% if mclinks_data[2] == 'Silver' %} selected {% endif %}>Silver</option>
+                                    <option value="Gold" {% if mclinks_data[2] == 'Gold' %} selected {% endif %}>Gold</option>
+                                </select>
+                            </td>
+                            <td><input type="number" name="quantity" value="{{ mclinks_data[3] }}"></td>
+                            <td><input type="number" name="market_price" value="{{ mclinks_data[4] }}"></td>
+                            <td><input type="number" name="guild_price" value="{{ mclinks_data[5] }}"></td>
+                            <td><button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Update</button></td>
+                        </form>
+                        <form action="{{ url_for('delete_a_mclink') }}" method="post">
+                            <input type="hidden" name="id" value="{{ mclinks_data[0] }}">
+                            <td><button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</button></td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

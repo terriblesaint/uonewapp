@@ -1,0 +1,134 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Delivery
+{% endblock %}
+
+{% block nav %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <img src="{{ url_for('static', filename='images/uo.png') }}" alt="UO Icon" class="small-image">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="ma">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mclinks">Mastery Chain Link Availability</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="selections">Mastery Chain Link Selection</a>
+                        </li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="a_users">User Management</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [2, 3] %}
+                                    <li><a class="dropdown-item" href="a_mclinks">Link Management</a></li>
+                                    <li><a class="dropdown-item" href="a_selections">Link Selections</a></li>
+                    {% endif %}
+                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                                    <li><a class="dropdown-item" href="mclinks_delivery">Link Delivery</a></li>
+                                    <li><a class="dropdown-item" href="a_history">Delivery History</a></li>
+                                </ul>
+                            </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0 right-align">
+                    {% if 'id' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="user">User Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="return confirm('Are you sure?')" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <b class="nav-item">Logged in as: <p style="color:blue; text-align:center;">{{ g.display_name }}</p></b>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="flash-message">
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="spacer"></div>
+{% if 'id' in session and g.is_admin in [2, 3] %}
+    <div class="a_buttons">
+        <form action="/test_reset_delivery" method="post">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: ERASE DELIVERY SELECTION</button>
+        </form>
+    </div>
+<br>
+{% endif %}
+    <div class="a_mclinks_table">
+        <h1>Links to Deliver</h1>
+        <hr>
+        {% for user_info in unique_names %}
+        <form action="/delivery" method="post">
+            <h2><input type="hidden" name="delivery_user" value="{{ user_info['id'] }}">
+                User: {{ user_info['display_name'] }} <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Deliver</button>
+            </h2>
+        </form>
+            <table class="table table-striped-columns table-hover table-bordered border-info">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quality</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total_cost = totals[user_info['id']] %}
+                    {% for selection in delivery_data %}
+                        {% if selection['user_id'] == user_info['id'] %}
+                            <tr>
+                                    <td>{{ selection['id'] }}</td>
+                                    <td>{{ selection['name'] }}</td>
+                                    <td>{{ selection['quality'] }}</td>
+                                    <td>{{ selection['s_quantity'] }}</td>
+                                    <td>{{ selection['links_total'] }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><input type="hidden" name="total"><b>Total Cost:</b> {{ total_cost }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

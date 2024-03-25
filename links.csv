@@ -1,0 +1,232 @@
+0,1,2,3,4,5
+234,Aegis Keep Damage,Bronze,10,110000,55000
+235,Alchemy /Healing /Veterinary Skill,Bronze,10,140000,70000
+236,Backstab Damage,Bronze,10,80000,40000
+237,Bard Reset /Break Ignore Chance,Bronze,10,80000,40000
+238,Barding Effect Duration,Bronze,10,80000,40000
+239,Boss Damage Resistance,Bronze,10,80000,40000
+240,Cavernam Damage,Bronze,10,110000,55000
+241,Chance for 5 Bonus Stealth Steps,Bronze,10,80000,40000
+242,Chest Success Chances/Progress,Bronze,10,80000,40000
+243,Chivalry Skill,Bronze,1,80000,40000
+244,Damage Dealt By Player,Bronze,0,80000,40000
+245,Damage on Ships,Bronze,7,140000,70000
+246,Damage Resistance,Bronze,6,80000,40000
+247,Damage Resistance on Ships,Bronze,8,80000,40000
+248,Damage to Barded Creatures,Bronze,0,140000,70000
+249,Damage to Beastial Creatures,Bronze,1,80000,40000
+250,Damage to Bosses,Bronze,2,110000,55000
+251,Damage to Construct Creatures,Bronze,5,80000,40000
+252,Damage to Creatures Above 66% HP,Bronze,4,140000,70000
+253,Damage to Creatures Below 33% HP,Bronze,1,80000,40000
+254,Damage to Daemonic Creatures,Bronze,0,80000,40000
+255,Damage to Elemental Creatures,Bronze,3,80000,40000
+256,Damage to Humanoid Creatures,Bronze,0,80000,40000
+257,Damage to Monstrous Creatures,Bronze,2,80000,40000
+258,Damage to Nature Creatures,Bronze,0,80000,40000
+259,Damage to Poisoned Creatures,Bronze,1,140000,70000
+260,Damage to Undead Creatures,Bronze,1,110000,55000
+261,Darkmire Temple Damage,Bronze,1,110000,55000
+262,Effective Barding Skill,Bronze,0,140000,70000
+263,Effective Lockpicking Skill,Bronze,0,80000,40000
+264,Effective Magic Resist Skill,Bronze,0,80000,40000
+265,Effective Parrying Skill,Bronze,21,80000,40000
+266,Effective Poisoning Skill,Bronze,11,80000,40000
+267,Follower Attack Speed,Bronze,0,140000,70000
+268,Follower Damage,Bronze,1,140000,70000
+269,Follower Damage Resistance,Bronze,0,140000,70000
+270,Follower Healing Received,Bronze,0,140000,70000
+271,Gold /Doubloon Drop Increase,Bronze,3,110000,55000
+272,Healing Amounts Received,Bronze,6,80000,40000
+273,Inferno Damage,Bronze,0,110000,55000
+274,Mausoleum Damage,Bronze,2,110000,55000
+275,Meditation Rate,Bronze,0,80000,40000
+276,Meditation Rate /Spell Disrupt Avoid Chance,Bronze,5,80000,40000
+277,Melee Accuracy,Bronze,0,140000,70000
+278,Melee Accuracy /Defense,Bronze,0,140000,70000
+279,Melee Aspect Effect Chance,Bronze,6,140000,70000
+280,Melee Aspect Effect Modifier,Bronze,22,110000,55000
+281,Melee Damage,Bronze,1,80000,40000
+282,Melee Damage /Ignore Armor Chance,Bronze,0,80000,40000
+283,Melee Defense,Bronze,3,80000,40000
+284,Melee Ignore Armor Chance,Bronze,6,80000,40000
+285,Melee Special Chance/Special Damage,Bronze,13,80000,40000
+286,Melee Swing Speed,Bronze,0,140000,70000
+287,Mount Petram Damage,Bronze,1,110000,55000
+288,Necromancy Skill,Bronze,0,140000,70000
+289,Nusero Damage,Bronze,0,110000,55000
+290,Ossuary Damage,Bronze,0,110000,55000
+291,Physical Damage Resistance,Bronze,2,80000,40000
+292,Poison Damage /Poison Resist Ignore,Bronze,10,80000,40000
+293,Pulma Damage,Bronze,2,110000,55000
+294,Shadowspire Cathedral Damage,Bronze,0,110000,55000
+295,Ship Cannon Damage,Bronze,2,140000,70000
+296,Special /Rare Loot Chance,Bronze,0,110000,55000
+297,Spell Aspect Effect Modifier,Bronze,8,110000,55000
+298,Spell Aspect Special Chance,Bronze,1,140000,70000
+299,Spell Charged Chance,Bronze,7,80000,40000
+300,Spell Charged Chance /Charged Damage,Bronze,12,80000,40000
+301,Spell Charged Damage,Bronze,10,80000,40000
+302,Spell Damage,Bronze,4,80000,40000
+303,Spell Damage Resistance,Bronze,2,80000,40000
+304,Spell Damage When No Followers,Bronze,13,110000,55000
+305,Spell Damage /Ignore Resist Chance,Bronze,4,80000,40000
+306,Spell Disruption Avoidance Chance,Bronze,6,80000,40000
+307,Spell Ignore Resist Chance,Bronze,6,80000,40000
+308,Spirit Speak /Inscription,Bronze,0,140000,70000
+309,Trap Damage,Bronze,5,80000,40000
+310,Wilderness Damage,Bronze,2,140000,70000
+311,Aegis Keep Damage,Silver,0,550000,275000
+312,Alchemy /Healing /Veterinary Skill,Silver,0,700000,350000
+313,Backstab Damage,Silver,0,550000,275000
+314,Bard Reset /Break Ignore Chance,Silver,0,550000,275000
+315,Barding Effect Duration,Silver,0,550000,275000
+316,Boss Damage Resistance,Silver,0,550000,275000
+317,Cavernam Damage,Silver,1,550000,275000
+318,Chance for 5 Bonus Stealth Steps,Silver,0,550000,275000
+319,Chest Success Chances/Progress,Silver,0,550000,275000
+320,Chivalry Skill,Silver,0,550000,275000
+321,Damage Dealt By Player,Silver,0,550000,275000
+322,Damage on Ships,Silver,0,700000,350000
+323,Damage Resistance,Silver,0,550000,275000
+324,Damage Resistance on Ships,Silver,0,550000,275000
+325,Damage to Barded Creatures,Silver,0,700000,350000
+326,Damage to Beastial Creatures,Silver,0,550000,275000
+327,Damage to Bosses,Silver,0,700000,350000
+328,Damage to Construct Creatures,Silver,0,550000,275000
+329,Damage to Creatures Above 66% HP,Silver,0,550000,275000
+330,Damage to Creatures Below 33% HP,Silver,0,550000,275000
+331,Damage to Daemonic Creatures,Silver,0,550000,275000
+332,Damage to Elemental Creatures,Silver,0,550000,275000
+333,Damage to Humanoid Creatures,Silver,0,550000,275000
+334,Damage to Monstrous Creatures,Silver,0,550000,275000
+335,Damage to Nature Creatures,Silver,0,550000,275000
+336,Damage to Poisoned Creatures,Silver,0,700000,350000
+337,Damage to Undead Creatures,Silver,0,550000,275000
+338,Darkmire Temple Damage,Silver,0,550000,275000
+339,Effective Barding Skill,Silver,0,600000,300000
+340,Effective Lockpicking Skill,Silver,0,550000,275000
+341,Effective Magic Resist Skill,Silver,0,550000,275000
+342,Effective Parrying Skill,Silver,0,550000,275000
+343,Effective Poisoning Skill,Silver,0,550000,275000
+344,Follower Attack Speed,Silver,0,700000,350000
+345,Follower Damage,Silver,0,700000,350000
+346,Follower Damage Resistance,Silver,0,700000,350000
+347,Follower Healing Received,Silver,0,700000,350000
+348,Gold /Doubloon Drop Increase,Silver,0,550000,275000
+349,Healing Amounts Received,Silver,0,550000,275000
+350,Inferno Damage,Silver,0,550000,275000
+351,Mausoleum Damage,Silver,0,550000,275000
+352,Meditation Rate,Silver,0,550000,275000
+353,Meditation Rate /Spell Disrupt Avoid Chance,Silver,0,550000,275000
+354,Melee Accuracy,Silver,0,550000,275000
+355,Melee Accuracy /Defense,Silver,0,550000,275000
+356,Melee Aspect Effect Chance,Silver,0,700000,350000
+357,Melee Aspect Effect Modifier,Silver,0,550000,275000
+358,Melee Damage,Silver,0,550000,275000
+359,Melee Damage /Ignore Armor Chance,Silver,0,550000,275000
+360,Melee Defense,Silver,0,550000,275000
+361,Melee Ignore Armor Chance,Silver,0,550000,275000
+362,Melee Special Chance/Special Damage,Silver,0,550000,275000
+363,Melee Swing Speed,Silver,0,700000,350000
+364,Mount Petram Damage,Silver,0,550000,275000
+365,Necromancy Skill,Silver,0,700000,350000
+366,Nusero Damage,Silver,1,550000,275000
+367,Ossuary Damage,Silver,2,550000,275000
+368,Physical Damage Resistance,Silver,0,550000,275000
+369,Poison Damage /Poison Resist Ignore,Silver,0,550000,275000
+370,Pulma Damage,Silver,0,550000,275000
+371,Shadowspire Cathedral Damage,Silver,1,550000,275000
+372,Ship Cannon Damage,Silver,0,700000,350000
+373,Special /Rare Loot Chance,Silver,3,550000,275000
+374,Spell Aspect Effect Modifier,Silver,0,550000,275000
+375,Spell Aspect Special Chance,Silver,0,700000,350000
+376,Spell Charged Chance,Silver,2,550000,275000
+377,Spell Charged Chance /Charged Damage,Silver,1,550000,275000
+378,Spell Charged Damage,Silver,0,550000,275000
+379,Spell Damage,Silver,0,550000,275000
+380,Spell Damage Resistance,Silver,0,550000,275000
+381,Spell Damage When No Followers,Silver,0,550000,275000
+382,Spell Damage /Ignore Resist Chance,Silver,2,550000,275000
+383,Spell Disruption Avoidance Chance,Silver,0,550000,275000
+384,Spell Ignore Resist Chance,Silver,0,550000,275000
+385,Spirit Speak /Inscription,Silver,0,700000,350000
+386,Trap Damage,Silver,0,550000,275000
+387,Wilderness Damage,Silver,0,550000,275000
+388,Aegis Keep Damage,Gold,0,2400000,2000000
+389,Alchemy /Healing /Veterinary Skill,Gold,0,2700000,2300000
+390,Backstab Damage,Gold,0,2400000,2000000
+391,Bard Reset /Break Ignore Chance,Gold,0,2400000,2000000
+392,Barding Effect Duration,Gold,0,2400000,2000000
+393,Boss Damage Resistance,Gold,0,2400000,2000000
+394,Cavernam Damage,Gold,0,2400000,2000000
+395,Chance for 5 Bonus Stealth Steps,Gold,0,2400000,2000000
+396,Chest Success Chances/Progress,Gold,0,2400000,2000000
+397,Chivalry Skill,Gold,0,2400000,2000000
+398,Damage Dealt By Player,Gold,0,2400000,2000000
+399,Damage on Ships,Gold,0,2700000,2300000
+400,Damage Resistance,Gold,0,2400000,2000000
+401,Damage Resistance on Ships,Gold,0,2400000,2000000
+402,Damage to Barded Creatures,Gold,0,2700000,2300000
+403,Damage to Beastial Creatures,Gold,0,2400000,2000000
+404,Damage to Bosses,Gold,0,2700000,2300000
+405,Damage to Construct Creatures,Gold,0,2400000,2000000
+406,Damage to Creatures Above 66% HP,Gold,0,2400000,2000000
+407,Damage to Creatures Below 33% HP,Gold,0,2400000,2000000
+408,Damage to Daemonic Creatures,Gold,0,2400000,2000000
+409,Damage to Elemental Creatures,Gold,0,2400000,2000000
+410,Damage to Humanoid Creatures,Gold,0,2400000,2000000
+411,Damage to Monstrous Creatures,Gold,0,2400000,2000000
+412,Damage to Nature Creatures,Gold,0,2400000,2000000
+413,Damage to Poisoned Creatures,Gold,0,2700000,2300000
+414,Damage to Undead Creatures,Gold,0,2400000,2000000
+415,Darkmire Temple Damage,Gold,1,2400000,2000000
+416,Effective Barding Skill,Gold,0,2400000,2000000
+417,Effective Lockpicking Skill,Gold,0,2400000,2000000
+418,Effective Magic Resist Skill,Gold,0,2400000,2000000
+419,Effective Parrying Skill,Gold,0,2400000,2000000
+420,Effective Poisoning Skill,Gold,0,2400000,2000000
+421,Follower Attack Speed,Gold,0,2700000,2300000
+422,Follower Damage,Gold,0,2700000,2300000
+423,Follower Damage Resistance,Gold,0,2700000,2300000
+424,Follower Healing Received,Gold,0,2700000,2300000
+425,Gold /Doubloon Drop Increase,Gold,0,2400000,2000000
+426,Healing Amounts Received,Gold,0,2400000,2000000
+427,Inferno Damage,Gold,1,2400000,2000000
+428,Mausoleum Damage,Gold,1,2400000,2000000
+429,Meditation Rate,Gold,0,2400000,2000000
+430,Meditation Rate /Spell Disrupt Avoid Chance,Gold,0,2400000,2000000
+431,Melee Accuracy,Gold,1,2700000,2300000
+432,Melee Accuracy /Defense,Gold,0,2700000,2300000
+433,Melee Aspect Effect Chance,Gold,0,2700000,2300000
+434,Melee Aspect Effect Modifier,Gold,0,2400000,2000000
+435,Melee Damage,Gold,0,2400000,2000000
+436,Melee Damage /Ignore Armor Chance,Gold,1,2400000,2000000
+437,Melee Defense,Gold,0,2700000,2300000
+438,Melee Ignore Armor Chance,Gold,0,2400000,2000000
+439,Melee Special Chance/Special Damage,Gold,0,2400000,2000000
+440,Melee Swing Speed,Gold,0,2700000,2300000
+441,Mount Petram Damage,Gold,0,2400000,2000000
+442,Necromancy Skill,Gold,0,2700000,2300000
+443,Nusero Damage,Gold,0,2400000,2000000
+444,Ossuary Damage,Gold,1,2400000,2000000
+445,Physical Damage Resistance,Gold,0,2400000,2000000
+446,Poison Damage /Poison Resist Ignore,Gold,0,2400000,2000000
+447,Pulma Damage,Gold,1,2400000,2000000
+448,Shadowspire Cathedral Damage,Gold,0,2400000,2000000
+449,Ship Cannon Damage,Gold,0,2700000,2300000
+450,Special /Rare Loot Chance,Gold,0,2400000,2000000
+451,Spell Aspect Effect Modifier,Gold,0,2400000,2000000
+452,Spell Aspect Special Chance,Gold,0,2700000,2300000
+453,Spell Charged Chance,Gold,0,2400000,2000000
+454,Spell Charged Chance /Charged Damage,Gold,0,2400000,2000000
+455,Spell Charged Damage,Gold,0,2400000,2000000
+456,Spell Damage,Gold,0,2400000,2000000
+457,Spell Damage Resistance,Gold,0,2400000,2000000
+458,Spell Damage When No Followers,Gold,0,2400000,2000000
+459,Spell Damage /Ignore Resist Chance,Gold,0,2400000,2000000
+460,Spell Disruption Avoidance Chance,Gold,0,2400000,2000000
+461,Spell Ignore Resist Chance,Gold,0,2400000,2000000
+462,Spirit Speak /Inscription,Gold,0,2700000,2300000
+463,Trap Damage,Gold,0,2400000,2000000
+464,Wilderness Damage,Gold,0,2400000,2000000
