@@ -61,10 +61,11 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 - Reset All Users' Selections
 	- Clears selection table in database and wipes all user's selections
 - TESTING: Assign Links
-	- Same as the Assign Links function, but does not wipe all user's selections for testing purposes. 
+	- Same as the Assign Links function, but does not wipe all user's selections for testing purposes or turn off Mastery Link Selection. 
 - Assign Links
 	- Takes all users who have made selections, randomizes their order, goes through each selection of theirs and checks for availability. If available assigns those links to that user and creates a record in a delivery table. If not available, skips and checks next selection. Does this for every user in the randomized order untill all selections are checked. Once complete wipes the records from the selection table
-
+	- Also turns off Mastery Link Selection for all users
+    - 
 ## Admin Page - Link Delivery
 - Admins have the ability to view and deliver user's assigned selections of mastery chain links
 

@@ -863,6 +863,9 @@ def assign_links():
     # Delete user's selections
     cursor.execute("DELETE FROM selections")
     conn.commit()
+
+    cursor.execute("UPDATE global SET selections_toggle = 0 WHERE id = 1")
+    conn.commit()
     conn.close()
 
     return redirect(url_for('mclinks_delivery'))
