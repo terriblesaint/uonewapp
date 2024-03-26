@@ -72,8 +72,11 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 - TESTING: Erase Delivery Selections
 	- For testing purposes, wipes all records in the delivery table
 - Deliver
-	- When selected by an admin, will confirm links have been delivered in game and will copy these records to the history table and also include datetime and which admin completed the delivery
-
+	- When selected by an admin, will confirm links have been delivered in game and will remove these records from the delivery table and copy them to the history table also including datetime and which admin completed the delivery
+	- Will also subtract that amount from the Mastery Chain Link list (the mclinks table in the database)
+- TESTING: Deliver
+  - Will do the same function as deliver but will not wipe the user's delivery records or subtract from the mclinks table
+  
 ## Admin Page - Delivery History
 - Admins have the ability to view and deliver user's assigned selections of mastery chain links
 

@@ -109,9 +109,9 @@
             </h2>
         </form>
         {% if 'id' in session and g.is_admin in [3] %}
-        <form action="/delivery" method="post">
+        <form action="/test_delivery" method="post">
             <input type="hidden" name="delivery_user" value="{{ user_info['id'] }}">
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: Deliver</button>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will NOT wipe the user info from the delivery table')">TESTING: Deliver</button>
         </form>
         <br>
                 {% endif %}

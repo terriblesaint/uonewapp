@@ -910,7 +910,7 @@ def test_delivery():
         conn.close()
 
         flash("User's Links Delivered", 'success')
-        return redirect(url_for('mclinks_delivery'))
+        return redirect(url_for('a_history'))
 
 @app.route('/delivery', methods=['POST'])
 def delivery():
@@ -928,10 +928,17 @@ def delivery():
                  current_timestamp))
             conn.commit()
 
+            cursor.execute(
+                "UPDATE mclinks SET quantity = quantity - ? WHERE id = ?",
+                (record['s_quantity'], record['mclink_id']))
+            conn.commit()
+
+        cursor.execute("DELETE FROM link_delivery WHERE user_id =?", (delivery_user))
+        conn.commit()
         conn.close()
 
         flash("User's Links Delivered", "success")
-        return redirect(url_for('mclinks_delivery'))
+        return redirect(url_for('a_history'))
 
 
 @app.route('/import_csv', methods=['GET','POST'])
