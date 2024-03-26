@@ -44,11 +44,11 @@ def register():
 
         # Check for empty fields
         if not username or not display_name or not password or not confirm_password:
-            flash('All fields are required.', 'error')
+            flash('All fields are required.', 'danger')
 
         # Check for matching password input
         elif password != confirm_password:
-            flash('Passwords do not match.', 'error')
+            flash('Passwords do not match.', 'danger')
 
         # Password complexity validation
         elif not (
@@ -60,11 +60,11 @@ def register():
         ):
             flash(
                 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.',
-                'error')
+                'danger')
         else:
             # Check if the username already exists
             if register_check_existing_user(username):
-                flash('Username already exists. Please choose a different one.', 'error')
+                flash('Username already exists. Please choose a different one.', 'danger')
 
             else:
                 # Register user
@@ -88,30 +88,25 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        if not username or not password:
+            flash('Please fill in both fields', 'danger')
+            return render_template('login.html')
+
         user_data = login_check_existing_user(username, password)
 
-        # Redirect to MA if user matches above check_existing_user function
         if user_data:
             session['id'] = user_data['id']
-
             flash('Login successful!', 'success')
             return redirect('ma')
 
-        if not username and not password:
-            flash('Please fill in both fields', 'error')
-            return render_template('login.html')
+        if user_data:
+            session['id'] = user_data['id']
+            flash('Login successful!', 'success')
+            return redirect('ma')
 
-        elif not username:
-            flash('Please enter a username.', 'error')
-            return render_template('login.html')
-
-        elif not password:
-            flash('Please enter a password.', 'error')
-            return render_template('login.html')
-
-        if not user:
-            flash('Incorrect username or password.', 'error')
-            return render_template('login.html')
+        else:
+            flash('Incorrect username or password.', 'danger')
 
     return render_template('login.html')
 
@@ -163,11 +158,11 @@ def update_user_selection():
         sel_name = request.form['link_name']
 
         if quantity == '0':
-            flash('Just Delete it!!', 'error')
+            flash('Just Delete it!!', 'danger')
             return redirect(url_for('selections'))
 
         if not (quality and quantity):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('selections'))
 
         conn, cursor = connect_to_database('uonew.db')
@@ -182,7 +177,7 @@ def update_user_selection():
             mclinks = cursor.fetchone()
 
             if int(quantity) > int(mclinks['quantity']):
-                flash('Not enough of that link available', 'error')
+                flash('Not enough of that link available', 'danger')
                 return redirect(url_for('selections'))
 
             cursor.execute("UPDATE selections SET s_quantity = ?, mclink_id = ? WHERE id = ?", (quantity, mclinks['id'], sel_id,))
@@ -199,7 +194,7 @@ def update_user_selection():
             mclinks = cursor.fetchone()
 
             if int(quantity) > int(mclinks['quantity']):
-                flash('Not enough of that link available', 'error')
+                flash('Not enough of that link available', 'danger')
                 return redirect(url_for('selections'))
 
             cursor.execute("UPDATE selections SET s_quantity = ? WHERE id = ?", (quantity, sel_id,))
@@ -220,11 +215,11 @@ def admin_update_user_selection():
         sel_name = request.form['link_name']
 
         if quantity == '0':
-            flash('Just Delete it!!', 'error')
+            flash('Just Delete it!!', 'danger')
             return redirect(url_for('a_selections'))
 
         if not (quality and quantity):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('a_selections'))
 
         conn, cursor = connect_to_database('uonew.db')
@@ -239,7 +234,7 @@ def admin_update_user_selection():
             mclinks = cursor.fetchone()
 
             if int(quantity) > int(mclinks['quantity']):
-                flash('Not enough of that link available', 'error')
+                flash('Not enough of that link available', 'danger')
                 return redirect(url_for('a_selections'))
 
             cursor.execute("UPDATE selections SET s_quantity = ?, mclink_id = ? WHERE id = ?", (quantity, mclinks['id'], sel_id,))
@@ -256,7 +251,7 @@ def admin_update_user_selection():
             mclinks = cursor.fetchone()
 
             if int(quantity) > int(mclinks['quantity']):
-                flash('Not enough of that link available', 'error')
+                flash('Not enough of that link available', 'danger')
                 return redirect(url_for('a_selections'))
 
             cursor.execute("UPDATE selections SET s_quantity = ? WHERE id = ?", (quantity, sel_id,))
@@ -385,7 +380,7 @@ def admin_add_user():
         user_level = request.form['user_level']
 
         if not (username and displayname and password and user_level):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('a_users'))
 
         conn, cursor = connect_to_database('uonew.db')
@@ -436,7 +431,7 @@ def update_a_mclinks():
         guild_price = request.form['guild_price']
 
         if not (name and quality and quantity and market_price and guild_price):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('a_mclinks'))
 
         conn, cursor = connect_to_database('uonew.db')
@@ -483,7 +478,7 @@ def add_a_mclink():
         guild_price = request.form['guild_price']
 
         if not (name and quality and quantity and market_price and guild_price):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('a_mclinks'))
 
         conn, cursor = connect_to_database('uonew.db')
@@ -567,7 +562,7 @@ def add_selection():
         quantity = int(request.form['quantity'])
 
         if quantity == '0':
-            flash('Just Delete it!!', 'error')
+            flash('Just Delete it!!', 'danger')
             return redirect(url_for('selections'))
 
         # Get User ID
@@ -576,7 +571,7 @@ def add_selection():
 
         # Ensure all fields are used
         if not (name and quality and quantity):
-            flash('All fields are required', 'error')
+            flash('All fields are required', 'danger')
             return redirect(url_for('selections'))
 
         # Initiate DB Connection
@@ -586,11 +581,11 @@ def add_selection():
         mclink_data = cursor.fetchone()
 
         if not mclink_data:
-            flash('No matching link found', 'error')
+            flash('No matching link found', 'danger')
             return redirect(url_for('selections'))
 
         if quantity > mclink_data['quantity']:
-            flash('Not enough quantity available', 'error')
+            flash('Not enough quantity available', 'danger')
             return redirect(url_for('selections'))
 
         # Check if selection exists
@@ -601,7 +596,7 @@ def add_selection():
             # If selection exists, update selection
             new_quantity = existing_selection['s_quantity'] + quantity
             if new_quantity > mclink_data['quantity']:
-                flash('Not enough quantity available', 'error')
+                flash('Not enough quantity available', 'danger')
                 return redirect(url_for('selections'))
             else:
                 cursor.execute("UPDATE selections SET s_quantity=? WHERE id=?", (new_quantity, existing_selection['id']))
@@ -751,11 +746,11 @@ def user_update_pass():
 
         # Check for empty fields
         if not old_password or not new_password or not confirm_password:
-            flash('All fields are required.', 'error')
+            flash('All fields are required.', 'danger')
 
         # Check for matching password input
         elif new_password != confirm_password:
-            flash('Passwords do not match.', 'error')
+            flash('Passwords do not match.', 'danger')
 
         # Password complexity validation
         elif not (
@@ -767,7 +762,7 @@ def user_update_pass():
         ):
             flash(
                 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.',
-                'error')
+                'danger')
 
         else:
             conn, cursor = connect_to_database('uonew.db')
