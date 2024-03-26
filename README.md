@@ -40,13 +40,11 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 
 ## Admin Page - User Management
 - Admins have the ability to view, add, delete or edit users including username, display name, password (without restrictions) and user level
-	- User levels: 
-	```
-	0 - Regular User
-	1 - Low Admin
-	2 - High Admin
-	3 - Main Admin
-	```
+	- User levels:
+      - 0 - Regular User
+      - 1 - Low Admin
+      - 2 - High Admin
+      - 3 - Main Admin
 
 ## Admin Page - Link Management
 - Admins have the ability to view, add, delete or edit mastery chain links including name, quality, quantity, market price and guild price
@@ -65,7 +63,7 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 - Assign Links
 	- Takes all users who have made selections, randomizes their order, goes through each selection of theirs and checks for availability. If available assigns those links to that user and creates a record in a delivery table. If not available, skips and checks next selection. Does this for every user in the randomized order untill all selections are checked. Once complete wipes the records from the selection table
 	- Also turns off Mastery Link Selection for all users
-    - 
+  
 ## Admin Page - Link Delivery
 - Admins have the ability to view and deliver user's assigned selections of mastery chain links
 
@@ -88,23 +86,18 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 ## User Levels
 
 ### Main Admin
-```
 - Pages
 	- All Pages
 - Functions
 	- All Functions including testing functions
-```
 
 ### High Admin
-```
 - Pages
 	- All Pages
 - Functions
 	- All Functions excluding testing functions
-```
 
 ### Low Admin
-```
 - Pages
 	- All Pages except for:
 	- User Management
@@ -112,13 +105,10 @@ The purpose of this application is to maintain a list of "Mastery Chain Links" (
 	- Link Selections
 - Functions
 	- Can use Deliver function on Delivery Page
-```
 
 ### Regular User
-```
 - Pages
 	- All Pages except for Admin Pages
-```
 
 :shipit:
 
