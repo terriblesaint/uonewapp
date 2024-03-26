@@ -546,7 +546,7 @@ def selections():
 
     # Get total cost of all links chosen by user
     cursor.execute("SELECT SUM(links_total) FROM selections WHERE user_id=?", (user_id,))
-    total_links_total = cursor.fetchone()[0]
+    total_links_total = "{:,}".format(cursor.fetchone()[0])
     conn.close()
 
     # Get all selected links of user (including mclinks data)
@@ -639,7 +639,7 @@ def a_selections():
         user_id = names['id']
         cursor.execute("SELECT SUM(links_total) FROM selections WHERE user_id=?", (user_id,))
         total_price = cursor.fetchone()[0]
-        totals[user_id] = total_price
+        totals[user_id] = "{:,}".format(total_price)
 
     # Get unique links in database
     cursor.execute("SELECT DISTINCT name FROM mclinks;")
@@ -669,7 +669,7 @@ def mclinks_delivery():
         cursor.execute("SELECT SUM(links_total) FROM link_delivery WHERE user_id=?", (user_id,))
 
         total_price = cursor.fetchone()[0]
-        totals[user_id] = total_price
+        totals[user_id] = "{:,}".format(total_price)
 
     conn.commit()
     conn.close()
@@ -695,7 +695,7 @@ def a_history():
         cursor.execute("SELECT SUM(links_total) FROM history WHERE user_id=?", (user_id,))
 
         total_price = cursor.fetchone()[0]
-        totals[user_id] = total_price
+        totals[user_id] = "{:,}".format(total_price)
 
     conn.commit()
     conn.close()
