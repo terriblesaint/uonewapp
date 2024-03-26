@@ -774,6 +774,7 @@ def user_update_pass():
             conn.close()
 
             flash('Password Updated Successful', 'success')
+    return redirect(url_for('user'))
 
 # Function to assign links to users
 @app.route('/test_assign_links')
