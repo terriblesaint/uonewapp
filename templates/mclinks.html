@@ -18,7 +18,7 @@
                             <a class="nav-link" href="ma">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mclinks">Mastery Chain Link Availability</a>
+                            <a class="nav-link" href="mclinks"><b>Mastery Chain Link Availability</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="selections">Mastery Chain Link Selection</a>
@@ -30,14 +30,14 @@
                                 Admin
                             </a>
                             <ul class="dropdown-menu">
+                            {% if 'id' in session and g.is_admin in [2, 3] %}
                                 <li><a class="dropdown-item" href="a_users">User Management</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                    {% endif %}
-                    {% if 'id' in session and g.is_admin in [2, 3] %}
+
+
                                     <li><a class="dropdown-item" href="a_mclinks">Link Management</a></li>
                                     <li><a class="dropdown-item" href="a_selections">Link Selections</a></li>
-                    {% endif %}
-                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                            {% endif %}
                                     <li><a class="dropdown-item" href="mclinks_delivery">Link Delivery</a></li>
                                     <li><a class="dropdown-item" href="a_history">Delivery History</a></li>
                                 </ul>

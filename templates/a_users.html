@@ -27,17 +27,17 @@
                     {% if 'id' in session and g.is_admin in [1, 2, 3] %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
+                                <b>Admin</b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="a_users">User Management</a></li>
+                            {% if 'id' in session and g.is_admin in [2, 3] %}
+                                <li><a class="dropdown-item" href="a_users"><b>User Management</b></a></li>
                                 <li><hr class="dropdown-divider"></li>
-                    {% endif %}
-                    {% if 'id' in session and g.is_admin in [2, 3] %}
+
+
                                     <li><a class="dropdown-item" href="a_mclinks">Link Management</a></li>
                                     <li><a class="dropdown-item" href="a_selections">Link Selections</a></li>
-                    {% endif %}
-                    {% if 'id' in session and g.is_admin in [1, 2, 3] %}
+                            {% endif %}
                                     <li><a class="dropdown-item" href="mclinks_delivery">Link Delivery</a></li>
                                     <li><a class="dropdown-item" href="a_history">Delivery History</a></li>
                                 </ul>
