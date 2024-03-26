@@ -108,6 +108,13 @@
                 User: {{ user_info['display_name'] }} <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Deliver</button>
             </h2>
         </form>
+        {% if 'id' in session and g.is_admin in [3] %}
+        <form action="/delivery" method="post">
+            <input type="hidden" name="delivery_user" value="{{ user_info['id'] }}">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: Deliver</button>
+        </form>
+        <br>
+                {% endif %}
             <table class="table table-striped-columns table-hover table-bordered border-info">
                 <thead class="table-primary">
                     <tr>

@@ -58,9 +58,7 @@ def register():
                 re.search(r'\d', password) and  # At least one digit
                 re.search(r'[!@#$%^&*()_+=\-[\]{};:\'",.<>?]', password)  # At least one symbol
         ):
-            flash(
-                'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.',
-                'danger')
+            flash('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.','danger')
         else:
             # Check if the username already exists
             if register_check_existing_user(username):
@@ -144,7 +142,7 @@ def reset_all_selections():
         conn.commit()
         conn.close()
 
-        flash('All User selections have been reset')
+        flash('All User selections have been reset', 'success')
         return redirect(url_for('a_selections'))
 
 # Function for the user to update an individual link selection
@@ -185,7 +183,7 @@ def update_user_selection():
             conn.commit()
             conn.close()
 
-            flash('Your selection has been updated')
+            flash('Your selection has been updated', 'success')
             return redirect(url_for('selections'))
 
         else:
@@ -242,7 +240,7 @@ def admin_update_user_selection():
             conn.commit()
             conn.close()
 
-            flash('Your selection has been updated')
+            flash('Your selection has been updated', 'success')
             return redirect(url_for('a_selections'))
 
         else:
@@ -259,7 +257,7 @@ def admin_update_user_selection():
             conn.commit()
             conn.close()
 
-            flash('Your selection has been updated')
+            flash('Your selection has been updated', 'success')
             return redirect(url_for('a_selections'))
 
 
@@ -306,7 +304,7 @@ def reset_user_selections():
         conn.commit()
         conn.close()
 
-        flash('All your selections have been reset')
+        flash('All your selections have been reset', 'success')
         status = user_data['sel_lock']
 
         print(status)
@@ -546,7 +544,10 @@ def selections():
 
     # Get total cost of all links chosen by user
     cursor.execute("SELECT SUM(links_total) FROM selections WHERE user_id=?", (user_id,))
-    total_links_total = "{:,}".format(cursor.fetchone()[0])
+    total_links_total = cursor.fetchone()[0]
+    if total_links_total is not None:
+        total_links_total = "{:,}".format(total_links_total)
+
     conn.close()
 
     # Get all selected links of user (including mclinks data)
@@ -760,9 +761,7 @@ def user_update_pass():
                 re.search(r'\d', new_password) and  # At least one digit
                 re.search(r'[!@#$%^&*()_+=\-[\]{};:\'",.<>?]', new_password)  # At least one symbol
         ):
-            flash(
-                'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.',
-                'danger')
+            flash('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.','danger')
 
         else:
             conn, cursor = connect_to_database('uonew.db')
@@ -892,11 +891,11 @@ def test_reset_history():
         conn.commit()
         conn.close()
 
-        flash('History has been wiped')
+        flash('History has been wiped', 'success')
         return redirect(url_for('a_history'))
 
-@app.route('/delivery', methods=['POST'])
-def delivery():
+@app.route('/test_delivery', methods=['POST'])
+def test_delivery():
     if request.method == 'POST':
         delivery_user = request.form['delivery_user']
         delivery_data = select_delivery(delivery_user)
@@ -910,7 +909,28 @@ def delivery():
 
         conn.close()
 
-        flash("User's Links Delivered")
+        flash("User's Links Delivered", 'success')
+        return redirect(url_for('mclinks_delivery'))
+
+@app.route('/delivery', methods=['POST'])
+def delivery():
+    if request.method == 'POST':
+        delivery_user = request.form['delivery_user']
+        delivery_data = select_delivery(delivery_user)
+        admin_id = session['id']
+        conn, cursor = connect_to_database('uonew.db')
+        current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        for record in delivery_data:
+            cursor.execute(
+                "INSERT INTO history (mclink_id, s_quantity, user_id, links_total, admin_id, datetime) VALUES (?, ?, ?, ?, ?, ?)",
+                (record['mclink_id'], record['s_quantity'], record['user_id'], record['links_total'], admin_id,
+                 current_timestamp))
+            conn.commit()
+
+        conn.close()
+
+        flash("User's Links Delivered", "success")
         return redirect(url_for('mclinks_delivery'))
 
 
