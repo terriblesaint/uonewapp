@@ -1,5 +1,5 @@
-# [NEW!] Guild App - Mastery Chain Links
-#### Video Demo:  <URL HERE>
+# [NEW!] Guild App - Mastery Chain Link App
+#### Video Demo:  https://youtu.be/JnINjFS2Nv8
 ## Description:
 This application is made for the the [NEW!] Guild Members who are playing a 25 year old Ultima Online video game!
 
