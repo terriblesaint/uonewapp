@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   function initTable() {
     $table.bootstrapTable('destroy').bootstrapTable({
-      height: 1000,
+      height: 650,
       locale: $('#locale').val(),
     })
     $table.on('check.bs.table uncheck.bs.table ' +

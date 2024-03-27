@@ -91,7 +91,7 @@
 {% block content %}
 
     <div class="spacer"></div>
-{% if 'id' in session and g.is_admin in [2, 3] %}
+{% if 'id' in session and g.is_admin in [3] %}
     <div class="a_buttons">
         <form action="/test_reset_delivery" method="post">
             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: ERASE DELIVERY SELECTION</button>
@@ -114,7 +114,7 @@
             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will NOT wipe the user info from the delivery table')">TESTING: Deliver</button>
         </form>
         <br>
-                {% endif %}
+        {% endif %}
             <table class="table table-striped-columns table-hover table-bordered border-info">
                 <thead class="table-primary">
                     <tr>

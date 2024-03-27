@@ -200,7 +200,7 @@ def update_user_selection():
             conn.commit()
             conn.close()
 
-            flash('Your selection has been updated')
+            flash('Your selection has been updated', 'success')
             return redirect(url_for('selections'))
 
 @app.route('/admin_update_user_selection', methods=['POST'])
@@ -385,7 +385,7 @@ def admin_add_user():
 
         hashed_password = generate_password_hash(password)
 
-        cursor.execute("INSERT INTO users (username, display_name, password, is_admin) VALUES (?, ?, ?);", (username, displayname, hashed_password, user_level))
+        cursor.execute("INSERT INTO users (username, display_name, password, is_admin) VALUES (?, ?, ?, ?);", (username, displayname, hashed_password, user_level))
 
         # Commit the transaction
         conn.commit()
@@ -405,7 +405,7 @@ def delete_a_user():
 
         conn, cursor = connect_to_database('uonew.db')
 
-        cursor.execute("DELETE FROM users WHERE id = ?;", (user_id))
+        cursor.execute("DELETE FROM users WHERE id = ?;", (user_id,))
 
         # Commit the transaction
         conn.commit()
@@ -881,7 +881,7 @@ def test_reset_delivery():
         conn.commit()
         conn.close()
 
-        flash('All Assigned Links have been reset')
+        flash('All Assigned Links have been reset', 'success')
         return redirect(url_for('a_selections'))
 
 @app.route('/test_reset_history', methods=['POST'])
@@ -925,18 +925,19 @@ def delivery():
         current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         for record in delivery_data:
+            print('qaunt1',record['s_quantity'], record['mclink_id'])
             cursor.execute(
                 "INSERT INTO history (mclink_id, s_quantity, user_id, links_total, admin_id, datetime) VALUES (?, ?, ?, ?, ?, ?)",
                 (record['mclink_id'], record['s_quantity'], record['user_id'], record['links_total'], admin_id,
                  current_timestamp))
             conn.commit()
-
+            print('subtract quant',record['s_quantity'], record['mclink_id'])
             cursor.execute(
                 "UPDATE mclinks SET quantity = quantity - ? WHERE id = ?",
                 (record['s_quantity'], record['mclink_id']))
             conn.commit()
 
-        cursor.execute("DELETE FROM link_delivery WHERE user_id =?", (delivery_user))
+        cursor.execute("DELETE FROM link_delivery WHERE user_id =?", (delivery_user,))
         conn.commit()
         conn.close()
 
@@ -972,7 +973,7 @@ def import_csv():
 
             conn.commit()
             conn.close()
-
+    flash('List Updated.', 'success')
     return redirect(url_for('a_mclinks'))
 
 @app.route('/export_csv', methods=['GET', 'POST'])
@@ -994,7 +995,7 @@ def export_csv():
                          download_name='links.csv',
                          as_attachment=True,
                          mimetype='text/csv')
-
+    flash('File Provided.', 'success')
     return redirect(url_for('a_mclinks'))
 
 

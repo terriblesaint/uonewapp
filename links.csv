@@ -1,10 +1,10 @@
 ID,Name,Quality,Quantity,Market Price,Guild Price
-234,Aegis Keep Damage,Bronze,10,110000,55000
-235,Alchemy /Healing /Veterinary Skill,Bronze,10,140000,70000
-236,Backstab Damage,Bronze,10,80000,40000
-237,Bard Reset /Break Ignore Chance,Bronze,10,80000,40000
-238,Barding Effect Duration,Bronze,10,80000,40000
-239,Boss Damage Resistance,Bronze,10,80000,40000
+234,Aegis Keep Damage,Bronze,15,110000,55000
+235,Alchemy /Healing /Veterinary Skill,Bronze,15,140000,70000
+236,Backstab Damage,Bronze,15,80000,40000
+237,Bard Reset /Break Ignore Chance,Bronze,15,80000,40000
+238,Barding Effect Duration,Bronze,15,80000,40000
+239,Boss Damage Resistance,Bronze,15,80000,40000
 240,Cavernam Damage,Bronze,10,110000,55000
 241,Chance for 5 Bonus Stealth Steps,Bronze,10,80000,40000
 242,Chest Success Chances/Progress,Bronze,10,80000,40000
