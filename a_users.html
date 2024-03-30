@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - User Management
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+    <div class="a_users_table">
+        <h1>Add New User</h1>
+        <hr>
+        <table class="table table-bordered border-info">
+            <thead class="table-primary">
+                <tr>
+                    <th>Username</th>
+                    <th>Display Name</th>
+                    <th>Password</th>
+                    <th>User Level</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="{{ url_for('admin_add_user') }}" method="post">
+                        <td><input type="text" name="username"></td>
+                        <td><input type="text" name="displayname"></td>
+                        <td><input type="text" name="password"></td>
+                        <td><input type="number" name="user_level"></td>
+                        <td><button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Add User</button></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="a_users_table">
+        <h1>User List</h1>
+        <hr>
+        <table class="table table-bordered border-info">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Display Name</th>
+                    <th>Password</th>
+                    <th>User Level</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users_data %}
+                    <tr>
+                        <form action="{{ url_for('admin_update_user') }}" method="post">
+                            <td><input type="hidden" name="id" value="{{ user['id'] }}">{{ user['id'] }}</td>
+                            <td><input type="text" name="username" value="{{ user['username'] }}"></td>
+                            <td><input type="text" name="display_name" value="{{ user['display_name'] }}"></td>
+                            <td><input type="text" name="password"></td>
+                            <td><input type="number" name="user_level" value="{{ user['is_admin'] }}"></td>
+                            <td><button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Update</button></td>
+                        </form>
+                        <form action="{{ url_for('delete_a_user') }}" method="post">
+                            <input type="hidden" name="id" value="{{ user['id'] }}">
+                            <td><button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</button></td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

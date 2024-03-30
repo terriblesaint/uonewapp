@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Delivery
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+{% if 'id' in session and g.is_admin in [3] %}
+    <div class="a_buttons">
+        <form action="/test_reset_delivery" method="post">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: ERASE DELIVERY SELECTION</button>
+        </form>
+    </div>
+<br>
+{% endif %}
+    <div class="a_mclinks_table">
+        <h1>Links to Deliver</h1>
+        <hr>
+        {% for user_info in unique_names %}
+        <form action="/delivery" method="post">
+            <h2><input type="hidden" name="delivery_user" value="{{ user_info['id'] }}">
+                User: {{ user_info['display_name'] }} <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">Deliver</button>
+            </h2>
+        </form>
+        {% if 'id' in session and g.is_admin in [3] %}
+        <form action="/test_delivery" method="post">
+            <input type="hidden" name="delivery_user" value="{{ user_info['id'] }}">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will NOT wipe the user info from the delivery table')">TESTING: Deliver</button>
+        </form>
+        <br>
+        {% endif %}
+            <table class="table table-striped-columns table-hover table-bordered border-info">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quality</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total_cost = totals[user_info['id']] %}
+                    {% for selection in delivery_data %}
+                        {% if selection['user_id'] == user_info['id'] %}
+                            <tr>
+                                    <td>{{ selection['id'] }}</td>
+                                    <td>{{ selection['name'] }}</td>
+                                    <td>{{ selection['quality'] }}</td>
+                                    <td>{{ selection['s_quantity'] }}</td>
+                                    <td>{{ selection['links_total'] }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><input type="hidden" name="total"><b>Total Cost:</b> {{ total_cost }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

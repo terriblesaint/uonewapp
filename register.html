@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <div class="register_form">
+        <h1>Register</h1>
+        <hr>
+        <p><b>Password Requirements:</b></p>
+        <p>Minimum 8 characters, a symbol, number and upper and lower case characters</p>
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="display_name" class="form-label">Display Name:</label>
+                <input type="display_name" class="form-control" id="display_name" name="display_name">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+{% endblock %}
+

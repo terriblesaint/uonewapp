@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Login
+{% endblock %}
+
+{% block content %}
+    <div class="login_form">
+        <h1>Login</h1>
+        <hr>
+        <form action="/login" method="post">
+            <div class="mb-3">
+                <label for="exampleInputName1" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="exampleInputName1" name="username" autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary" value="Login">Login</button>
+        </form>
+    </div>
+{% endblock %}

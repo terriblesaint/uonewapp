@@ -1,0 +1,97 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Link Selections
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+{% if 'id' in session and g.is_admin in [2, 3] %}
+    <div class="a_buttons">
+        <form action="/global_selection_toggle" method="post">
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure? This turns Selection on/off for everyone!')">Toggle Mastery Link Selections</button>
+            <h3 style="color:blue; text-align:center;">{{ s_toggle }}</h3>
+        </form>
+    </div>
+    <br>
+    <div class="a_buttons">
+        <form action="/reset_all_selections" method="post">
+            <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure? This resets ALL users selections!')">Reset All Users Selections</button>
+        </form>
+    </div>
+    <br>
+    <div class="a_buttons">
+        <form action="/assign_links" method="get">
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure? THIS WILL DELETE ALL USERS SELECTIONS AND ASSIGN LINKS IN DELIVERY!')">Assign Links</button>
+        </form>
+    </div>
+    <br>
+{% endif %}
+{% if 'id' in session and g.is_admin in [3] %}
+    <div class="a_buttons">
+        <form action="/test_assign_links" method="get">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Does not delete user selection. USE FOR TESTING')">TESTING: Assign Links</button>
+        </form>
+    </div>
+    <br>
+{% endif %}
+    <div class="a_mclinks_table">
+        <h1>Selected Links</h1>
+        <hr>
+        {% for user_info in unique_names %}
+            <h2>User: {{ user_info['display_name'] }}</h2>
+            <h3>
+                {% if user_info['sel_lock'] == 1 %}
+                    Selections Locked
+                {% else %}
+                    Selections Open
+                {% endif %}
+            </h3>
+            <table class="table table-striped-columns table-hover table-bordered border-info">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quality</th>
+                        <th>Quantity</th>
+                        <th>Guild Price</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total_cost = totals[user_info['id']] %}
+                    {% for selection in selection_data %}
+                        {% if selection['user_id'] == user_info['id'] %}
+                            <tr>
+                                <form action="/admin_update_user_selection" method="post" style="display:inline;">
+                                    <td><input type="hidden" name="selection_id" value="{{ selection['id'] }}">{{ selection['id'] }}</td>
+                                    <td><input type="hidden" name="link_name" value="{{ selection['name'] }}">{{ selection['name'] }}</td>
+                                    <td class="quality">
+                                        <select class="form-control" name="quality" id="quality">
+                                            <option {% if selection['quality'] == 'Bronze' %} selected {% endif %}>Bronze</option>
+                                            <option {% if selection['quality'] == 'Silver' %} selected {% endif %}>Silver</option>
+                                            <option {% if selection['quality'] == 'Gold' %} selected {% endif %}>Gold</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" name="quantity" value="{{ selection['s_quantity'] }}"></td>
+                                    <td>{{ selection['guild_price'] }}</td>
+                                    <input type="hidden" name="mclink_id" value="{{ selection['mclink_id'] }}">
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </td>
+                                </form>
+                                <form action="/admin_delete_user_selection" method="post" style="display:inline;">
+                                    <input type="hidden" name="selection_id" value="{{ selection['id'] }}">
+                                    <td>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><input type="hidden" name="total"><b>Total Cost:</b> {{ total_cost }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

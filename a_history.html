@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Admin - Delivery History
+{% endblock %}
+
+{% block content %}
+    <div class="spacer"></div>
+{% if 'id' in session and g.is_admin in [3] %}
+    <div class="a_buttons">
+        <form action="/test_reset_history" method="post">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">TESTING: Erase All History</button>
+        </form>
+    </div>
+{% endif %}
+    <div class="a_mclinks_table">
+        <h1>Delivered Links</h1>
+        <hr>
+        {% for user_info in unique_names %}
+            <h2>User: {{ user_info['display_name'] }}</h2>
+
+            <table class="table table-striped-columns table-hover table-bordered border-info">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date/Time</th>
+                        <th>Name</th>
+                        <th>Quality</th>
+                        <th>Quantity</th>
+                        <th>Guild Price</th>
+                        <th>Delivered By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total_cost = totals[user_info['id']] %}
+                    {% for selection in history_data %}
+                        {% if selection['user_id'] == user_info['id'] %}
+                            <tr>
+                                <form action="/admin_update_user_selection" method="post" style="display:inline;">
+                                    <td>{{ selection['id'] }}</td>
+                                    <td>{{ selection['datetime'] }}</td>
+                                    <td>{{ selection['name'] }}</td>
+                                    <td>{{ selection['quality'] }}</td>
+                                    <td>{{ selection['s_quantity'] }}</td>
+                                    <td>{{ selection['guild_price'] }}</td>
+                                    <td>{{ selection['admin_display_name'] }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><input type="hidden" name="total"><b>Total Spent:</b> {{ total_cost }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
