@@ -14,7 +14,7 @@ import io
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 app.config['DEBUG'] = True
-app.secret_key = 'get_skey()'
+app.secret_key = 'iamasecret'
 
 # Before all requests, create the following variables
 @app.before_request
