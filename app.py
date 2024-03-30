@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_file
 from werkzeug.security import generate_password_hash
-from helpers import connect_to_database
+from helpers import connect_to_database,get_skey
 from users import select_all_users, get_user_data, login_check_existing_user, register_check_existing_user
 from selections import check_selection_toggle, select_selections, select_delivery, select_history, get_names
 from mclinks import select_links
 from datetime import datetime
-from collections import defaultdict
 import sqlite3
 import re
 import pandas as pd
@@ -15,7 +14,7 @@ import io
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 app.config['DEBUG'] = True
-app.secret_key = '*()123poiQWE'
+app.secret_key = 'get_skey()'
 
 # Before all requests, create the following variables
 @app.before_request
@@ -78,7 +77,7 @@ def register():
 
         return redirect(url_for('register'))
 
-    return render_template('register.html')
+    return render_template('register.html', page_identifier='register')
 
 # Login Page Functionality
 @app.route('/login', methods=['GET', 'POST'])
@@ -106,7 +105,7 @@ def login():
         else:
             flash('Incorrect username or password.', 'danger')
 
-    return render_template('login.html')
+    return render_template('login.html', page_identifier='login')
 
 # Logout Functionality
 @app.route('/logout')
@@ -156,7 +155,7 @@ def update_user_selection():
         sel_name = request.form['link_name']
 
         if quantity == '0':
-            flash('Just Delete it!!', 'danger')
+            flash('JUST DELETE IT!', 'danger')
             return redirect(url_for('selections'))
 
         if not (quality and quantity):
@@ -514,19 +513,20 @@ def index():
 # Route for Members' Area
 @app.route('/ma')
 def ma():
-    return render_template('ma.html')
+    return render_template('ma.html', page_identifier='ma')
 
 # Route for User - Mastery Chain Link List
 @app.route('/mclinks', methods=['GET'])
 def mclinks():
     mclinks_data = select_links()
-    return render_template('mclinks.html', mclinks_data=mclinks_data)
+    return render_template('mclinks.html', mclinks_data=mclinks_data, page_identifier='mclinks')
 
 # Route for Admin - Mastery Chain Link List
 @app.route('/a_mclinks', methods=['GET'])
 def a_mclinks():
     mclinks_data = select_links()
-    return render_template('a_mclinks.html', mclinks_data=mclinks_data)
+    return render_template('a_mclinks.html', mclinks_data=mclinks_data, page_identifier='a_mclinks')
+
 
 # Route for User - Mastery Chain Link Selections
 @app.route('/selections', methods=['GET', 'POST'])
@@ -553,7 +553,7 @@ def selections():
     # Get all selected links of user (including mclinks data)
     selections_data = select_selections(user_id)
 
-    return render_template('selections.html', unique_names=unique_names, selections_data=selections_data, total_links_total=total_links_total)
+    return render_template('selections.html', unique_names=unique_names, selections_data=selections_data, total_links_total=total_links_total, page_identifier='selections')
 
 @app.route('/add_selection', methods=['POST'])
 def add_selection():
@@ -650,7 +650,7 @@ def a_selections():
     conn.close()
 
     return render_template('a_selections.html', s_toggle=s_toggle, selection_data=selection_data,
-                           unique_names=unique_names, totals=totals, unique_links=unique_links)
+                           unique_names=unique_names, totals=totals, unique_links=unique_links, page_identifier='a_selections')
 
 @app.route('/mclinks_delivery', methods=['GET', 'POST'])
 def mclinks_delivery():
@@ -676,7 +676,7 @@ def mclinks_delivery():
     conn.close()
 
     return render_template('mclinks_delivery.html', delivery_data=delivery_data,
-                           unique_names=unique_names, totals=totals)
+                           unique_names=unique_names, totals=totals, page_identifier='mclinks_delivery')
 
 @app.route('/a_history')
 def a_history():
@@ -702,19 +702,19 @@ def a_history():
     conn.close()
 
     return render_template('a_history.html', history_data=history_data,
-                           unique_names=unique_names, totals=totals)
+                           unique_names=unique_names, totals=totals, page_identifier='a_history')
 
 # Route for Admin - User Management
 @app.route('/a_users')
 def a_users():
     users_data = select_all_users()
-    return render_template('a_users.html', users_data=users_data)
+    return render_template('a_users.html', users_data=users_data, page_identifier='a_users')
 
 # Route for User - User Management
 @app.route('/user', methods=['GET', 'POST'])
 def user():
     user_data = get_user_data()
-    return render_template('user.html', user_data=user_data)
+    return render_template('user.html', user_data=user_data, page_identifier='user')
 
 @app.route('/user_update_user', methods=['POST'])
 def user_update_user():
